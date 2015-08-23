@@ -1,17 +1,24 @@
 var koa = require('koa');
 var app = koa();
-var router = require('koa-router')();
+var route = require('koa-router')();
 var logger = require('koa-logger');
 var serve = require('koa-static');
 var router = require('koa-router')();
+var views  = require('co-views');
  
 // Logger
 app.use(logger());
 app.use(serve(process.cwd() + '/public'));
 
 
+var render = views(process.cwd() + '/views', {
+  map: {
+    html: 'swig'
+  }
+});
+
 router.get('/', function *(next) {
-  this.body = 'Hello World!';
+  this.body = yield render('home');
 });
 
 app
