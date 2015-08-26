@@ -1,6 +1,5 @@
 var koa = require('koa');
 var app = koa();
-var route = require('koa-router')();
 var logger = require('koa-logger');
 var serve = require('koa-static');
 var router = require('koa-router')();
